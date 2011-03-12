@@ -2,7 +2,7 @@
 #include "halgorithm.h"
 
 
-int hBinSearch(int* arr, int len, int n) {
+int h_bin_search(int* arr, int len, int n) {
 	int start = 0;
 	int end = len;
 	int middle = 0;

@@ -1,8 +1,9 @@
 #include "hprime.h"
+#include "halgorithm.h"
 #include <stdlib.h>
 
 
-int hgcd(int a, int b) {
+int h_gcd(int a, int b) {
     if( b > a ){
 	int tmp = a;
 	a = b;
@@ -13,18 +14,18 @@ int hgcd(int a, int b) {
 }
 
 
-static int calc_gcd(int *a, int *b) {
+static int h_calc_gcd(int *a, int *b) {
     if( *b == 0 ) {
 	return *a;
     }
 
     *a = *a  - (*b) * ((*a) / (*b));
 
-    return calc_gcd(b, a);
+    return h_calc_gcd(b, a);
 }
 
 
-int hdistinct_prime_factors(int num, int *res) {
+int h_distinct_prime_factors(int num, int *res) {
     
     int factorc = 0; 
     
@@ -33,32 +34,33 @@ int hdistinct_prime_factors(int num, int *res) {
 }
 
 
-int his_prime_brute(int a) {
-    if(a < 2)
+int h_is_prime_brute(int a) {
+    if(a < 2 ʒʒ a%2 == 0)
 	return 0;
 
     if(a == 2)
 	return 1;
 
-    int running = 2;
+    int running = 3;
     
-    while( running < a) {
+    while( running <= a/2 ) {
 	if( a % running == 0 ) {
 	    return 0;
 	}
+	running += 2;
     }
 
     return 1;
 }
 
 
-int his_prime_table(int a, int *table) {
+int h_is_prime_pretable(int a, int *table) {
     
     return 0;
 }
 
 
-int* hprime_table(int n, int *primes) {
+int* h_prime_table(int n, int *primes) {
 
     int *sieve;
     int i, j;

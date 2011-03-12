@@ -1,12 +1,12 @@
 
 /* Front-end function to call for calculating gcd */
-int hgcd(int a, int b);
+int h_gcd(int a, int b);
 
 
 /* Function that does the dirty work for calculating
  * gcd
 */
-static int calc_gcd(int *a, int *b);
+static int h_calc_gcd(int *a, int *b);
 
 
 /* Calculates the distinct prime factors of a number
@@ -14,18 +14,18 @@ static int calc_gcd(int *a, int *b);
  * *res is the result array
  * returns the length of the result array
  */
-int hdistinct_prime_factors(int num, int *res);
+int h_distinct_prime_factors(int num, int *res);
 
 
 /* Returns 1 if a is prime, 0 if it's not */
-int his_prime_brute(int a);
+int h_is_prime_brute(int a);
 
 
-int his_prime_table(int a, int* table);
+int h_is_prime_table(int a, int* table);
 
 /* Returns a table of n first primes
  * n is the number of primes to get
  * primes is the preallocated table of integers
 */
-int* hprime_table(int n, int *primes);
+int* h_prime_table(int n, int *primes);
 

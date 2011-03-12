@@ -1,10 +1,10 @@
 
 /* Use binary search to the int array
- * int* is the array where the num is serched
- * int is the length of the array
- * int is the number to be searched
- * if int is not found, -1 is returned
+ * arr is the array where the num is serched
+ * len is the length of the array
+ * n is the number to be searched
+ * if n is not found, -1 is returned
  * otherwise index of the target is returned
  */
-int hBinSearch(int*, int, int);
+int h_bin_search(int* arr, int len, int n);
 
