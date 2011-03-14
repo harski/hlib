@@ -25,9 +25,34 @@ static int h_calc_gcd(int *a, int *b) {
 }
 
 
-int h_distinct_prime_factors(int num, int *res) {
+int h_distinct_prime_factors(int num, int *res, int* table, int* table_len) {
     
-    int factorc = 0; 
+    int factor_c = 0; 
+    int pos;
+    int res_size = 20;
+    int i;
+
+    free(res);
+    res = malloc(res_size*sizeof(int));
+
+    /* TODO: Fix this mess! */
+
+    while( ! ( pos = h_bin_search(table, *table_len , num)) ) {
+	res[factor_c++] = table[pos];
+	if( factor_c == res_size-1 ) {
+	    
+	    /* update array size */
+	    int *temp = malloc(2*res_size*sizeof(int));
+	    for( i=0; i<factor_c; i++ ) {
+		temp[i] = res[i];
+	    }
+	    
+	    free(res);
+	    res = temp;
+	}
+    }
+    
+    res[factor_c++] = table[pos];
     
 
     return 0;
@@ -51,12 +76,6 @@ int h_is_prime_brute(int a) {
     }
 
     return 1;
-}
-
-
-int h_is_prime_pretable(int a, int *table) {
-    
-    return 0;
 }
 
 
