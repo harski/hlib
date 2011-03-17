@@ -53,7 +53,6 @@ int h_distinct_prime_factors(int num, int *res, int* table, int* table_len) {
     }
     
     res[factor_c++] = table[pos];
-    
 
     return 0;
 }

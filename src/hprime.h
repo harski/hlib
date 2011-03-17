@@ -1,4 +1,7 @@
 
+
+
+
 /* Front-end function to call for calculating gcd */
 int h_gcd(int a, int b);
 
