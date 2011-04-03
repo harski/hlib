@@ -1,49 +1,61 @@
 
-ROOT_DIR = .
-SRC_DIR = $(ROOT_DIR)/src
-OBJ_DIR = $(ROOT_DIR)/obj
-DEP_DIR = $(ROOT_DIR)/dep
 
-MAIN_TARGET = halgorithm.so
-MAIN_VER = 1
-MINOR_VER = 0
+MAJORVER =1
+MINORVER =0
 
-FULL_TARGET = lib$(MAIN_TARGET).$(MAIN_VER).$(MINOR_VER)
+LIBNAME =libhutil
 
-SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
+ROOT_DIR =.
+SRC_DIR =$(ROOT_DIR)/src
+OBJ_DIR =$(ROOT_DIR)/obj
+SOBJ_DIR =$(ROOT_DIR)/sobj
+DEP_DIR =$(ROOT_DIR)/dep
 
-#DEP_FILES2 = $($(SRC_FILES):$(SRC_DIR)=$(DEP_DIR))
-DEP_FILES2 = $(subst $(SRC_DIR),$(DEP_DIR),$(SRC_FILES))
-DEP_FILES = $(subst .c,.d,$(DEP_FILES2))
+SHARED_DIR =/opt/lib
 
-#OBJ_FILES2 = $($(SRC_FILES):$(SRC_DIR)=$(OBJ_DIR))
-OBJ_FILES2 = $(subst $(SRC_DIR),$(OBJ_DIR),$(SRC_FILES))
-OBJ_FILES = $(subst .c,.o,$(OBJ_FILES2))
+CC =gcc
+AR =ar
+CFLAGS =-c -Wall
+DEBUG =
+
+STATICCFLAGS =
+STATICARFLAGS =-cvq
+SCFLAGS =$(CFLAGS) -fPIC
+SHAREDCFLAGS =-shared -Wl,-soname,$(LIBNAME).so.$(MAJORVER)
+DEPFLAGS =-M -MT $(OBJDIR)/
+
+SRC_FILES =$(wildcard $(SRC_DIR)/*.c)
+
+DEP_FILES2 =$(subst $(SRC_DIR),$(DEP_DIR),$(SRC_FILES))
+DEP_FILES =$(subst .c,.d,$(DEP_FILES2))
+
+OBJ_FILES2 =$(subst $(SRC_DIR),$(OBJ_DIR),$(SRC_FILES))
+OBJ_FILES =$(subst .c,.o,$(OBJ_FILES2))
+
+SOBJ_FILES2 =$(subst $(SRC_DIR),$(SOBJ_DIR),$(SRC_FILES))
+SOBJ_FILES =$(subst .c,.o,$(SOBJ_FILES2))
 
 
-OBJS = $(OBJ_DIR)/halgorithm.o
-DEPS = $()/
-
-CC = gcc
-DEBUG = #-g
-CFLAGS = -c -fPIC
-DEPFLAGS = -M -MT $(OBJ_DIR)/
-
-#$(OBJ_DIR)/halgorithm.o: $($$@:.o=.c) $($$@:.o=.h)
-#	$(CC) $(CFLAGS) $(DEBUG)
-
-.PHONY: all-before all
-
-all: all-before $(FULL_TARGET)
-	@echo "All done!"
+all: all-before shared static
 
 all-before: dirs
 
-$(FULL_TARGET): $(OBJ_FILES)
-	$(CC) $(DEBUG) -shared -Wl,-soname,lib$(MAIN_TARGET).$(MAIN_VER) -o $(FULL_TARGET)
+install: install-shared install-static
 
-dirs: $(OBJ_DIR) $(DEP_DIR)
-#@echo "Directories created"
+shared: $(SOBJ_FILES)
+	$(CC) $(SHAREDCFLAGS) -o $(LIBNAME).so.$(MAJORVER).$(MINORVER) $(SOBJ_FILES)
+
+static: $(OBJ_FILES)
+	$(AR) $(STATICARFLAGS) $(LIBNAME).a $(OBJ_FILES)
+
+install-shared:
+	mv $(LIBNAME).so.$(MAJORVER).$(MINORVER) /opt/lib
+	ln -sf $(SHARED_DIR)/$(LIBNAME).so.$(MAJORVER).$(MINORVER) $(SHARED_DIR)/$(LIBNAME).so
+	ln -sf $(SHARED_DIR)/$(LIBNAME).so.$(MAJORVER).$(MINORVER) $(SHARED_DIR)/$(LIBNAME).so.$(MAJORVER)
+
+install-static:
+
+dirs: $(OBJ_DIR) $(DEP_DIR) $(SOBJ_DIR)
 
 $(OBJ_DIR):
 	@mkdir -p $@
@@ -51,8 +63,8 @@ $(OBJ_DIR):
 $(DEP_DIR):
 	@mkdir -p $@
 
-#$(OBJ_DIR)/%.o: $(DEP_DIR)/%.d
-#	$(CC) $(CFLAGS)  -o $@
+$(SOBJ_DIR):
+	@mkdir -p $@
 
 #create dependency files
 $(DEP_DIR)/%.d: $(SRC_DIR)/%.c
@@ -61,9 +73,13 @@ $(DEP_DIR)/%.d: $(SRC_DIR)/%.c
 $(OBJ_DIR)/%.o:
 	$(CC) $(CFLAGS) $(DEBUG) -o $@ $(SRC_DIR)/$*.c
 
+$(SOBJ_DIR)/%.o:
+	$(CC) $(SCFLAGS) $(DEBUG) -o $@ $(SRC_DIR)/$*.c
+
 #include dependency files
 -include $(DEP_FILES)
 
 clean:
-	rm -f $(DEP_DIR)/* $(OBJ_DIR)/* $(FULL_TARGET)
+	rm -f $(DEP_DIR)/* $(OBJ_DIR)/* $(SOBJ_DIR)/* $(LIBNAME).a $(LIBNAME).so.$(MAJORVER).$(MINORVER)
+
 
