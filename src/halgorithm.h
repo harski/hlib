@@ -1,3 +1,9 @@
+#ifndef HALGORITHM_H
+#define HALGORITHM_H
+
+/*******************************************
+ * Binary search
+ ******************************************/
 
 /* Use binary search to the int array
  * arr is the array where the num is serched
@@ -7,4 +13,14 @@
  * otherwise index of the target is returned
  */
 int h_bin_search(int* arr, int len, int n);
+
+
+/*******************************************
+ * Permutation, originally by Sami Hyvonen
+ ******************************************/
+
+int* permutation(int *data, const unsigned int L, const unsigned int N);
+
+
+#endif /* HALGORITHM_H */
 
