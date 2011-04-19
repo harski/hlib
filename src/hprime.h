@@ -1,3 +1,11 @@
+#ifndef HPRIME_H
+#define HPRIME_H
+
+/* Upper limits for number of primes */
+#define H_PRIMES_IN_UINT32 203280221
+#define H_PRIMES_IN_INT32 105097565
+#define H_PRIMES_IN_UINT64 18446744073709551616
+#define H_PRIMES_IN_INT64 9223372036854775808
 
 /* Front-end function to call for calculating gcd */
 int h_gcd(int a, int b);
@@ -15,10 +23,16 @@ int h_is_prime_brute(int a);
  */
 int h_is_prime_table(int *a, int *table, int *len);
 
+/* Returns the count of primes under n
+ * *n is the upper limit
+ */
+int h_primes_under(int *n);
 
 /* Returns a table of n first primes
  * n is the number of primes to get
  * primes is the preallocated table of integers
  */
 int* h_prime_table(int n, int *primes);
+
+#endif 
 
