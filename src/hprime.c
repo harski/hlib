@@ -1,6 +1,8 @@
+#include <stdlib.h>
+#include <math.h>
 #include "hprime.h"
 #include "halgorithm.h"
-#include <stdlib.h>
+
 
 /* Function that does the dirty work for calculating
  * gcd
@@ -64,6 +66,9 @@ int h_is_prime_table(int *a, int *table, int *len) {
     return h_bin_search(table, *len, *a);
 }
 
+int h_primes_under(int *n) {
+    return (int)((1.25506 * *n) / log((double)*n));
+}
 
 /* Returns n first prime numbers as a int*
  * int *primes _must_ be initialized beforehand */
@@ -71,10 +76,13 @@ int* h_prime_table(int n, int *primes) {
 
     int *sieve;
     int i, j, p;
- 
-    sieve = malloc(20*n*sizeof(int));
+    int upper_bound;
 
-    for(i=0; i<20*n; i++) {
+    upper_bound = 20 * n;
+ 
+    sieve = malloc(upper_bound*sizeof(int));
+
+    for(i=0; i<upper_bound; i++) {
 	sieve[i] = 1;
     }
     
@@ -82,7 +90,7 @@ int* h_prime_table(int n, int *primes) {
     primes[1] = 3;
     for(i=2; i<n; i++) {
 	p = (primes[i-1]-1)/2;
-	for(j=p; j<20*n; j+=primes[i-1]) {
+	for(j=p; j<upper_bound; j+=primes[i-1]) {
 	    sieve[j] = 0;
 	}
 	while( !sieve[++p] );
