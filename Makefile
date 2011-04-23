@@ -36,16 +36,20 @@ SOBJ_FILES2 =$(subst $(SRC_DIR),$(SOBJ_DIR),$(SRC_FILES))
 SOBJ_FILES =$(subst .c,.o,$(SOBJ_FILES2))
 
 
-all: all-before shared static
+.PHONY: all all-before clean libs dirs install-shared install-static
+
+all: all-before libs
 
 all-before: dirs
 
 install: install-shared install-static
 
-shared: $(SOBJ_FILES)
+libs: $(LIBNAME).a $(LIBNAME).so.$(MAJORVER).$(MINORVER)
+
+$(LIBNAME).so.$(MAJORVER).$(MINORVER): $(SOBJ_FILES)
 	$(CC) $(SHAREDCFLAGS) -o $(LIBNAME).so.$(MAJORVER).$(MINORVER) $(SOBJ_FILES)
 
-static: $(OBJ_FILES)
+$(LIBNAME).a: $(OBJ_FILES)
 	$(AR) $(STATICARFLAGS) $(LIBNAME).a $(OBJ_FILES)
 
 install-shared:
