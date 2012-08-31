@@ -13,7 +13,6 @@ h_array *h_array_create(size_t size) {
     arr->elements = 0;
     arr->array = malloc(arr->size * arr->element_size);
 
-
     return arr;
 }
 
@@ -27,14 +26,14 @@ int h_array_destroy(h_array *ha) {
 
 int h_array_add(h_array *ha, void *elem) {
     if(ha->elements == ha->size) {
-	void *tmp = malloc(2*ha->size*ha->element_size);
+        void *tmp = malloc(2*ha->size*ha->element_size);
 
-	/* Copy array */
-	memcpy(tmp, ha->array, ha->elements * ha->element_size);
-	
-	free(ha->array);
-	ha->array = tmp;
-	ha->size *= 2;
+        /* Copy array */
+        memcpy(tmp, ha->array, ha->elements * ha->element_size);
+        
+        free(ha->array);
+        ha->array = tmp;
+        ha->size *= 2;
     }
 
     /* Get index and copy the element */
@@ -47,8 +46,4 @@ int h_array_add(h_array *ha, void *elem) {
 void* h_array_get_element(h_array *ha, unsigned index) {
     return h_array_get_real_index(ha, index);
 }
-
-
-
-
 

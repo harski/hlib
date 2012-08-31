@@ -23,7 +23,7 @@ int h_is_prime_brute(int a);
  */
 int h_is_prime_table(int *a, int *table, int *len);
 
-/* Returns the count of primes under n
+/* Returns the number of primes under n
  * *n is the upper limit
  */
 int h_primes_under(int *n);
