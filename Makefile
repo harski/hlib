@@ -24,6 +24,9 @@ SCFLAGS =$(CFLAGS) -fPIC
 SHAREDCFLAGS =-shared -Wl,-soname,$(LIBNAME).so.$(MAJORVER)
 DEPFLAGS =-M -MT $(OBJDIR)/
 
+TARGET_STATIC =$(LIBNAME).a
+TARGET_SHARED =$(LIBNAME).so.$(MAJORVER).$(MINORVER)
+
 SRC_FILES =$(wildcard $(SRC_DIR)/*.c)
 
 DEP_FILES2 =$(subst $(SRC_DIR),$(DEP_DIR),$(SRC_FILES))
@@ -36,20 +39,20 @@ SOBJ_FILES2 =$(subst $(SRC_DIR),$(SOBJ_DIR),$(SRC_FILES))
 SOBJ_FILES =$(subst .c,.o,$(SOBJ_FILES2))
 
 
-.PHONY: all all-before clean libs dirs install-shared install-static
-
-all: all-before libs
+all: all-before shared static
 
 all-before: dirs
 
 install: install-shared install-static
 
-libs: $(LIBNAME).a $(LIBNAME).so.$(MAJORVER).$(MINORVER)
+static: $(TARGET_STATIC)
 
-$(LIBNAME).so.$(MAJORVER).$(MINORVER): $(SOBJ_FILES)
+shared: $(TARGET_SHARED)
+
+$(TARGET_SHARED): $(SOBJ_FILES)
 	$(CC) $(SHAREDCFLAGS) -o $(LIBNAME).so.$(MAJORVER).$(MINORVER) $(SOBJ_FILES)
 
-$(LIBNAME).a: $(OBJ_FILES)
+$(TARGET_STATIC): $(OBJ_FILES)
 	$(AR) $(STATICARFLAGS) $(LIBNAME).a $(OBJ_FILES)
 
 install-shared:
@@ -70,9 +73,10 @@ $(DEP_DIR):
 $(SOBJ_DIR):
 	@mkdir -p $@
 
-#create dependency files
+#create and include dependency files
 $(DEP_DIR)/%.d: $(SRC_DIR)/%.c
 	$(CC) -M -MF $@ -MT $(OBJ_DIR)/$*.o $<
+	-include $(DEP_FILES)
 
 $(OBJ_DIR)/%.o:
 	$(CC) $(CFLAGS) $(DEBUG) -o $@ $(SRC_DIR)/$*.c
@@ -80,10 +84,7 @@ $(OBJ_DIR)/%.o:
 $(SOBJ_DIR)/%.o:
 	$(CC) $(SCFLAGS) $(DEBUG) -o $@ $(SRC_DIR)/$*.c
 
-#include dependency files
--include $(DEP_FILES)
-
 clean:
-	rm -f $(DEP_DIR)/* $(OBJ_DIR)/* $(SOBJ_DIR)/* $(LIBNAME).a $(LIBNAME).so.$(MAJORVER).$(MINORVER)
+	rm -rf $(DEP_DIR)/ $(OBJ_DIR)/ $(SOBJ_DIR)/ $(LIBNAME).a $(LIBNAME).so.$(MAJORVER).$(MINORVER)
 
-
+.PHONY: all all-before clean install install-shared install-static shared static
