@@ -56,14 +56,18 @@ int h_is_prime_brute(int a) {
 }
 
 
-/* Checks if a given number is a prime by checking the table.
- * a is the number to be searched,
- * table is the array of primes,
- * len is the length of the prime table.
- * Returns the index of the found value or -1 if value not found
- */
-int h_is_prime_table(int *a, int *table, int *len) {
-    return h_bin_search(table, *len, *a);
+int h_is_prime_table(int a, int *table, int len) {
+    int index = h_bin_search(table, len, a);
+
+    if (index == -1)
+        return 0;
+    else
+        return 1;
+}
+
+int h_prime_table_get_index(int a, int *table, int len)
+{
+    return b_bin_search(table, len, a);
 }
 
 
