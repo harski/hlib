@@ -1,0 +1,5 @@
+libhutil.a
+libhutil.so.*
+obj/
+sobj/
+dep/
