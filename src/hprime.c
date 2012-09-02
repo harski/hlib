@@ -37,11 +37,11 @@ static int h_calc_gcd(int *a, int *b) {
  * Returns 1 if prime, -1 if not
  */
 int h_is_prime_brute(int a) {
-    if(a < 2 || a%2 == 0)
-        return -1;
-
     if(a == 2)
         return 1;
+
+    if(a < 2 || a%2 == 0)
+        return -1;
 
     int running = 3;
     
