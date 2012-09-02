@@ -67,7 +67,7 @@ int h_is_prime_table(int a, int *table, int len) {
 
 int h_prime_table_get_index(int a, int *table, int len)
 {
-    return b_bin_search(table, len, a);
+    return h_bin_search(table, len, a);
 }
 
 
