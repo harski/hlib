@@ -11,7 +11,9 @@ OBJ_DIR =$(ROOT_DIR)/obj
 SOBJ_DIR =$(ROOT_DIR)/sobj
 DEP_DIR =$(ROOT_DIR)/dep
 
-SHARED_DIR =/opt/lib
+PREFIX =/usr/local
+LIBDIR =$(PREFIX)/lib
+INCLUDEDIR =$(PREFIX)/include
 
 CC =gcc
 AR =ar
@@ -50,17 +52,19 @@ static: $(TARGET_STATIC)
 shared: $(TARGET_SHARED)
 
 $(TARGET_SHARED): $(SOBJ_FILES)
-	$(CC) $(SHAREDCFLAGS) -o $(LIBNAME).so.$(MAJORVER).$(MINORVER) $(SOBJ_FILES)
+	$(CC) $(SHAREDCFLAGS) -o $@ $(SOBJ_FILES)
 
 $(TARGET_STATIC): $(OBJ_FILES)
-	$(AR) $(STATICARFLAGS) $(LIBNAME).a $(OBJ_FILES)
+	$(AR) $(STATICARFLAGS) $@ $(OBJ_FILES)
 
-install-shared:
-	mv $(LIBNAME).so.$(MAJORVER).$(MINORVER) /opt/lib
-	ln -sf $(SHARED_DIR)/$(LIBNAME).so.$(MAJORVER).$(MINORVER) $(SHARED_DIR)/$(LIBNAME).so
-	ln -sf $(SHARED_DIR)/$(LIBNAME).so.$(MAJORVER).$(MINORVER) $(SHARED_DIR)/$(LIBNAME).so.$(MAJORVER)
+# TODO: install the headers, too!
+install-shared: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
+	install $(TARGET_SHARED) $(LIBDIR)
+	ln -sf $(LIBDIR)/$(LIBNAME).so.$(MAJORVER) $(LIBDIR)/$(LIBNAME).so
+	ln -sf $(LIBDIR)/$(TARGET_SHARED) $(LIBDIR)/$(LIBNAME).so.$(MAJORVER)
 
-install-static:
+install-static: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
+	install $(TARGET_STATIC) $(LIBDIR)
 
 dirs: $(OBJ_DIR) $(DEP_DIR) $(SOBJ_DIR)
 
@@ -71,6 +75,15 @@ $(DEP_DIR):
 	@mkdir -p $@
 
 $(SOBJ_DIR):
+	@mkdir -p $@
+
+$(PREFIX):
+	@mkdir -p $@
+
+$(LIBDIR):
+	@mkdir -p $@
+
+$(INCLUDEDIR):
 	@mkdir -p $@
 
 #create and include dependency files
@@ -88,3 +101,4 @@ clean:
 	rm -rf $(DEP_DIR)/ $(OBJ_DIR)/ $(SOBJ_DIR)/ $(LIBNAME).a $(LIBNAME).so.$(MAJORVER).$(MINORVER)
 
 .PHONY: all all-before clean install install-shared install-static shared static
+
