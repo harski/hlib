@@ -34,20 +34,20 @@ static int h_calc_gcd(int *a, int *b) {
 
 
 /* Brute-forces the given number.
- * Returns 1 if prime, -1 if not
+ * Returns 1 if prime, 0 if not
  */
 int h_is_prime_brute(int a) {
     if(a == 2)
         return 1;
 
     if(a < 2 || a%2 == 0)
-        return -1;
+        return 0;
 
     int running = 3;
     
     while(running <= a/2) {
         if( a % running == 0 )
-            return -1;
+            return 0;
 
         running += 2;
     }
