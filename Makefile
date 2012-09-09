@@ -57,11 +57,12 @@ $(TARGET_SHARED): $(SOBJ_FILES)
 $(TARGET_STATIC): $(OBJ_FILES)
 	$(AR) $(STATICARFLAGS) $@ $(OBJ_FILES)
 
-# TODO: install the headers, too!
 install-shared: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
 	install $(TARGET_SHARED) $(LIBDIR)
 	ln -sf $(LIBDIR)/$(LIBNAME).so.$(MAJORVER) $(LIBDIR)/$(LIBNAME).so
 	ln -sf $(LIBDIR)/$(TARGET_SHARED) $(LIBDIR)/$(LIBNAME).so.$(MAJORVER)
+	install src/hprime.h $(INCLUDEDIR)
+	install src/halgorithm.h $(INCLUDEDIR)
 
 install-static: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
 	install $(TARGET_STATIC) $(LIBDIR)
