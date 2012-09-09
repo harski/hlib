@@ -3,6 +3,7 @@
 
 /*******************************************
  * Binary search
+ * Returns the index where the n is found or -1 not found
  ******************************************/
 
 int h_bin_search(int* arr, int len, int n) {
@@ -14,12 +15,12 @@ int h_bin_search(int* arr, int len, int n) {
     while(start != end) {
         middle = (start+end) / 2;
         if (arr[middle] == n )
-        	return middle;
+            return middle;
 
-        if (n < middle) {
-          end = middle;
+        if (n < arr[middle]) {
+            end = middle;
         } else {
-          start = middle;
+            start = middle;
         }
     }
 
