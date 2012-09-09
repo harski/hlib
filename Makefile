@@ -17,7 +17,7 @@ INCLUDEDIR =$(PREFIX)/include
 
 CC =gcc
 AR =ar
-CFLAGS =-c -Wall
+CFLAGS =-c -Wall -g
 DEBUG =
 
 STATICCFLAGS =
