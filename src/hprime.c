@@ -56,14 +56,21 @@ int h_is_prime_brute(int a) {
 }
 
 
-int h_is_prime_table(int a, int *table, int len) {
-    int index = h_bin_search(table, len, a);
+int cmpint_search (const void *key, const void *x)
+{
+    return *(int *)key - *(int *)x;
+}
 
-    if (index == -1)
+
+int h_is_prime_table(int a, int *table, int len)
+{
+    void * tmp = bsearch(&a, table, len, sizeof(int), cmpint_search);
+    if (tmp==NULL)
         return 0;
     else
         return 1;
 }
+
 
 int h_prime_table_get_index(int a, int *table, int len)
 {
