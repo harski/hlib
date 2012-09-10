@@ -40,5 +40,10 @@ int h_primes_under(int *n);
  */
 int* h_prime_table(int n, int *primes);
 
+
+int h_prime_sieve (char *sieve, size_t size);
+
+void h_get_primes_from_sieve (char *sieve, size_t ssize, int *primes);
+
 #endif 
 

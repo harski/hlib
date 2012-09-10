@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 #include "hprime.h"
 
@@ -121,5 +122,40 @@ int* h_prime_table(int n, int *primes) {
     free(sieve);
 
     return primes;
+}
+
+
+int h_prime_sieve (char *sieve, size_t size)
+{
+    int i, j;
+    int counter = 0;
+
+    sieve[0] = 0;
+    sieve[1] = 0;
+
+    for (i=2; i<size; ++i)
+        sieve[i] = 1;
+
+    for (i=2; i<size; ++i) {
+        if (sieve[i]==1) {
+            ++counter;
+            for (j=2*i; j<size; j+=i)
+                sieve[j] = 0;
+        }
+    }
+    
+    return counter;
+}
+
+
+void h_get_primes_from_sieve (char *sieve, size_t ssize, int *primes)
+{
+    int i;
+    int pcount = 0;
+
+    for (i=0; i<ssize; ++i) {
+        if (sieve[i]==1)
+            primes[pcount++] = i;
+    }
 }
 
