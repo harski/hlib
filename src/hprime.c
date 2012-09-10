@@ -1,7 +1,7 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <math.h>
 #include "hprime.h"
-#include "halgorithm.h"
 
 
 /* Function that does the dirty work for calculating
@@ -74,7 +74,12 @@ int h_is_prime_table(int a, int *table, int len)
 
 int h_prime_table_get_index(int a, int *table, int len)
 {
-    return h_bin_search(table, len, a);
+    void * tmp = bsearch(&a, table, len, sizeof(int), cmpint_search);
+
+    if (tmp==NULL)
+        return -1;
+
+    return ((intptr_t)tmp - (intptr_t)table) / sizeof(int);
 }
 
 

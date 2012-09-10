@@ -1,38 +1,6 @@
 #include <stdlib.h>
 #include "halgorithm.h"
 
-/*******************************************
- * Binary search
- * Returns the index where the n is found or -1 not found
- ******************************************/
-
-int h_bin_search(int* arr, int len, int n) {
-    int start = 0;
-    int end = len;
-    int middle = 0;
-
-    /* Just do it! */
-    while(start != end) {
-        middle = (start+end) / 2;
-        if (arr[middle] == n )
-            return middle;
-
-        if (n < arr[middle]) {
-            end = middle;
-        } else {
-            start = middle;
-        }
-    }
-
-    /* If the last index checked is the one */
-    if (arr[start] == n) {
-        return start;
-    }
-
-    /* Value not found */
-    return -1;
-}
-
 
 /*******************************************
  * Permutation, originally by Sami Hyvonen
