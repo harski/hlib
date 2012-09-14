@@ -41,8 +41,13 @@ int h_primes_under(int *n);
 int* h_prime_table(int n, int *primes);
 
 
+/* Fills the pre-allocated sieve with 0's and 1's, 1's marking the position of
+ * the primes. */
 int h_prime_sieve (char *sieve, size_t size);
 
+
+/* Fills the pre-allocated prime table with primes, based on the pre calculated
+ * sieve. */
 void h_get_primes_from_sieve (char *sieve, size_t ssize, int *primes);
 
 #endif 
