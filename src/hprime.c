@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "hprime.h"
+#include "hutil.h"
 
 
 /* Function that does the dirty work for calculating

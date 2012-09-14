@@ -1,5 +1,5 @@
-#ifndef HPRIME_H
-#define HPRIME_H
+#ifndef HUTIL_H
+#define HUTIL_H
 
 /* Upper limits for number of primes */
 #define H_PRIMES_IN_UINT32 203280221
@@ -50,5 +50,12 @@ int h_prime_sieve (char *sieve, size_t size);
  * sieve. */
 void h_get_primes_from_sieve (char *sieve, size_t ssize, int *primes);
 
-#endif 
+
+/*******************************************
+ * Permutation, originally by Sami Hyvonen
+ ******************************************/
+int* permutation(int *data, const unsigned int L, const unsigned int N);
+
+
+#endif /* HUTIL_H */
 

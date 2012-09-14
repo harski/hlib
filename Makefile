@@ -61,8 +61,7 @@ install-shared: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
 	install $(TARGET_SHARED) $(LIBDIR)
 	ln -sf $(LIBDIR)/$(LIBNAME).so.$(MAJORVER) $(LIBDIR)/$(LIBNAME).so
 	ln -sf $(LIBDIR)/$(TARGET_SHARED) $(LIBDIR)/$(LIBNAME).so.$(MAJORVER)
-	install src/hprime.h $(INCLUDEDIR)
-	install src/halgorithm.h $(INCLUDEDIR)
+	install src/hutil.h $(INCLUDEDIR)
 
 install-static: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
 	install $(TARGET_STATIC) $(LIBDIR)
