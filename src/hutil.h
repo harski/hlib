@@ -9,11 +9,11 @@
 
 
 /* Front-end function to call for calculating gcd */
-int h_gcd(int a, int b);
+int gcd(int a, int b);
 
 
 /* Returns 1 if a is prime, 0 if it's not */
-int h_is_prime_brute(int a);
+int is_prime_brute(int a);
 
 
 /* Checks if a given number is a prime by checking the table.
@@ -22,34 +22,34 @@ int h_is_prime_brute(int a);
  * len is the length of the prime table.
  * Returns a non-zero or 0 if depending wether the number was found.
  */
-int h_is_prime_table(int a, int *table, int len);
+int is_prime_table(int a, int *table, int len);
 
 
 /* Returns the index of the prime or -1 if it isn't in the table. */
-int h_prime_table_get_index(int a, int *table, int len);
+int prime_table_get_index(int a, int *table, int len);
 
 /* Returns the number of primes under n
  * *n is the upper limit
  */
-int h_primes_under(int *n);
+int primes_under(int *n);
 
 
 /* Returns a table of n first primes
  * n is the number of primes to get
  * primes is the preallocated table of integers
  */
-int* h_prime_table(int n, int *primes);
+int* prime_table(int n, int *primes);
 
 
 /* Fills the pre-allocated sieve with 0's and 1's, 1's marking the position of
  * the primes. */
-int h_prime_sieve (char *sieve, size_t size);
+int prime_sieve (char *sieve, size_t size);
 
 
 /* Fills the pre-allocated prime table with primes, based on the pre calculated
  * sieve.
  * Returns the number of primes found */
-int h_get_primes_from_sieve (char *sieve, size_t ssize, int *primes);
+int get_primes_from_sieve (char *sieve, size_t ssize, int *primes);
 
 
 /*******************************************

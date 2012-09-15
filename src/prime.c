@@ -8,36 +8,36 @@
 /* Function that does the dirty work for calculating
  * gcd
  */
-static int h_calc_gcd(int *a, int *b);
+static int calc_gcd(int *a, int *b);
 
 
 /* Calculates and returns the greatest common divisor as integer */
-int h_gcd(int a, int b) {
+int gcd(int a, int b) {
     if (b > a) {
         int tmp = a;
         a = b;
         b = tmp;
     }
     
-    return h_calc_gcd(&a, &b);
+    return calc_gcd(&a, &b);
 }
 
 
 /* A helper function for calculating the gcd. Does the actual dirty work */
-static int h_calc_gcd(int *a, int *b) {
+static int calc_gcd(int *a, int *b) {
     if (*b == 0)
        return *a;
 
     *a = *a  - (*b) * ((*a) / (*b));
 
-    return h_calc_gcd(b, a);
+    return calc_gcd(b, a);
 }
 
 
 /* Brute-forces the given number.
  * Returns 1 if prime, 0 if not
  */
-int h_is_prime_brute(int a) {
+int is_prime_brute(int a) {
     if(a == 2)
         return 1;
 
@@ -63,7 +63,7 @@ int cmpint_search (const void *key, const void *x)
 }
 
 
-int h_is_prime_table(int a, int *table, int len)
+int is_prime_table(int a, int *table, int len)
 {
     void * tmp = bsearch(&a, table, len, sizeof(int), cmpint_search);
     if (tmp==NULL)
@@ -73,7 +73,7 @@ int h_is_prime_table(int a, int *table, int len)
 }
 
 
-int h_prime_table_get_index(int a, int *table, int len)
+int prime_table_get_index(int a, int *table, int len)
 {
     void * tmp = bsearch(&a, table, len, sizeof(int), cmpint_search);
 
@@ -84,14 +84,14 @@ int h_prime_table_get_index(int a, int *table, int len)
 }
 
 
-int h_primes_under(int *n) {
+int primes_under(int *n) {
     return (int)((1.25506 * *n) / log((double)*n));
 }
 
 
 /* Returns n first prime numbers as a int*
  * int *primes _must_ be initialized beforehand */
-int* h_prime_table(int n, int *primes) {
+int* prime_table(int n, int *primes) {
 
     int *sieve;
     int i, j, p;
@@ -125,7 +125,7 @@ int* h_prime_table(int n, int *primes) {
 }
 
 
-int h_prime_sieve (char *sieve, size_t size)
+int prime_sieve (char *sieve, size_t size)
 {
     int i, j;
     int counter = 0;
@@ -149,7 +149,7 @@ int h_prime_sieve (char *sieve, size_t size)
 
 
 
-int h_get_primes_from_sieve (char *sieve, size_t ssize, int *primes)
+int get_primes_from_sieve (char *sieve, size_t ssize, int *primes)
 {
     int i;
     int pcount = 0;
