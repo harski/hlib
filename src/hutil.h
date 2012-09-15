@@ -47,8 +47,9 @@ int h_prime_sieve (char *sieve, size_t size);
 
 
 /* Fills the pre-allocated prime table with primes, based on the pre calculated
- * sieve. */
-void h_get_primes_from_sieve (char *sieve, size_t ssize, int *primes);
+ * sieve.
+ * Returns the number of primes found */
+int h_get_primes_from_sieve (char *sieve, size_t ssize, int *primes);
 
 
 /*******************************************

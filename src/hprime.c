@@ -148,14 +148,20 @@ int h_prime_sieve (char *sieve, size_t size)
 }
 
 
-void h_get_primes_from_sieve (char *sieve, size_t ssize, int *primes)
+
+int h_get_primes_from_sieve (char *sieve, size_t ssize, int *primes)
 {
     int i;
     int pcount = 0;
 
-    for (i=0; i<ssize; ++i) {
+    if (ssize >= 3)
+        primes[pcount++] = 2;
+
+    for (i=3; i<ssize; i+=2) {
         if (sieve[i]==1)
             primes[pcount++] = i;
     }
+
+    return pcount;
 }
 
