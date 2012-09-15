@@ -1,7 +1,9 @@
+# Copyright 2011-2012 Tuomo Hartikainen <hartitu@gmail.com>.
+# Licensed under the 2-clause BSD license.
 
 
-MAJORVER =1
-MINORVER =0
+MAJORVER =0
+MINORVER =1
 
 LIBNAME =libhutil
 
@@ -17,7 +19,6 @@ INCLUDEDIR =$(PREFIX)/include
 CC =gcc
 AR =ar
 CFLAGS =-c -Wall -g
-DEBUG =
 
 STATICCFLAGS =
 STATICARFLAGS =-cvq
@@ -79,10 +80,10 @@ $(INCLUDEDIR):
 	@mkdir -p $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)/hutil.h
-	$(CC) $(CFLAGS) $(DEBUG) -o $@ $(SRC_DIR)/$*.c
+	$(CC) $(CFLAGS) -o $@ $(SRC_DIR)/$*.c
 
 $(SOBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)/hutil.h
-	$(CC) $(SCFLAGS) $(DEBUG) -o $@ $(SRC_DIR)/$*.c
+	$(CC) $(SCFLAGS) -o $@ $(SRC_DIR)/$*.c
 
 clean:
 	rm -rf $(OBJ_DIR)/ $(SOBJ_DIR)/ $(LIBNAME).a $(LIBNAME).so.$(MAJORVER).$(MINORVER)
