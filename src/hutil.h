@@ -1,3 +1,7 @@
+/* Copyright 2011-2012 Tuomo Hartikainen <hartitu@gmail.com>.
+ * Licensed under the 2-clause BSD license. */
+
+
 #ifndef HUTIL_H
 #define HUTIL_H
 

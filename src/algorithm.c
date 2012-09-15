@@ -1,10 +1,9 @@
+/* Copyright 2011 Sami Hyvönen
+ * Licensed under the 2-clause BSD license. */
+
 #include <stdlib.h>
 #include "hutil.h"
 
-
-/*******************************************
- * Permutation, originally by Sami Hyvonen
- ******************************************/
 
 static unsigned int* init_factorial(const unsigned int size);
 static void swip(int *data, const unsigned int L, const unsigned int I, const unsigned int J);
