@@ -8,11 +8,12 @@
 static unsigned int* init_factorial(const unsigned int size);
 static void swip(int *data, const unsigned int L, const unsigned int I, const unsigned int J);
 
-// 0 < size 
+/* 0 < size */
 static unsigned int* init_factorial( const unsigned int size ) {
     unsigned int* fact = (unsigned *)malloc(sizeof(int)*size);
-    fact[0] = 1;
     unsigned int i;
+
+    fact[0] = 1;
 
     for (i=1; i<size; i++) {
         fact[i] = fact[i-1] * i;
@@ -21,12 +22,13 @@ static unsigned int* init_factorial( const unsigned int size ) {
     return fact;
 }
 
-// I < J <= L
+/* I < J <= L */
 static void swip(int data[], const unsigned int L, const unsigned int I, const unsigned int J) {
     int t = data[I];
-    data[I] = data[J];
     int k;
     int i;
+
+    data[I] = data[J];
     
     for (i = I+1; i<=J; i++){
         k = data[i];

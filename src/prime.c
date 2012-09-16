@@ -40,14 +40,15 @@ static int calc_gcd(int *a, int *b) {
 /* Brute-forces the given number.
  * Returns 1 if prime, 0 if not
  */
-int is_prime_brute(int a) {
+int is_prime_brute(int a)
+{
+    int running = 3;
+
     if(a == 2)
         return 1;
 
     if(a < 2 || a%2 == 0)
         return 0;
-
-    int running = 3;
     
     while(running <= a/2) {
         if( a % running == 0 )
