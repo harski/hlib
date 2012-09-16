@@ -18,7 +18,15 @@ INCLUDEDIR =$(PREFIX)/include
 
 CC =gcc
 AR =ar
-CFLAGS =-c -Wall -g
+CFLAGS =-c -Wall -pedantic
+
+ifdef DEBUG
+CFLAGS += -g
+else
+CFLAGS += -O2
+endif
+
+LIBS =-lm
 
 STATICCFLAGS =
 STATICARFLAGS =-cvq
@@ -48,7 +56,7 @@ static: $(TARGET_STATIC)
 shared: $(TARGET_SHARED)
 
 $(TARGET_SHARED): $(SOBJ_FILES)
-	$(CC) $(SHAREDCFLAGS) -o $@ $(SOBJ_FILES)
+	$(CC) $(SHAREDCFLAGS) $(LIBS) -o $@ $(SOBJ_FILES)
 
 $(TARGET_STATIC): $(OBJ_FILES)
 	$(AR) $(STATICARFLAGS) $@ $(OBJ_FILES)
@@ -86,7 +94,7 @@ $(SOBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)/hutil.h
 	$(CC) $(SCFLAGS) -o $@ $(SRC_DIR)/$*.c
 
 clean:
-	rm -rf $(OBJ_DIR)/ $(SOBJ_DIR)/ $(LIBNAME).a $(LIBNAME).so.$(MAJORVER).$(MINORVER)
+	rm -rf $(OBJ_DIR)/ $(SOBJ_DIR)/ $(LIBNAME).a $(LIBNAME).so.*
 
 .PHONY: all all-before clean install install-shared install-static shared static
 
