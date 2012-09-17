@@ -38,11 +38,11 @@ TARGET_SHARED =$(LIBNAME).so.$(MAJORVER).$(MINORVER)
 
 SRC_FILES =$(wildcard $(SRC_DIR)/*.c)
 
-OBJ_FILES2 =$(subst $(SRC_DIR),$(OBJ_DIR),$(SRC_FILES))
-OBJ_FILES =$(subst .c,.o,$(OBJ_FILES2))
+OBJ_FILES =$(subst $(SRC_DIR),$(OBJ_DIR),$(SRC_FILES))
+OBJ_FILES :=$(subst .c,.o,$(OBJ_FILES))
 
-SOBJ_FILES2 =$(subst $(SRC_DIR),$(SOBJ_DIR),$(SRC_FILES))
-SOBJ_FILES =$(subst .c,.o,$(SOBJ_FILES2))
+SOBJ_FILES =$(subst $(SRC_DIR),$(SOBJ_DIR),$(SRC_FILES))
+SOBJ_FILES :=$(subst .c,.o,$(SOBJ_FILES))
 
 
 all: all-before shared static
