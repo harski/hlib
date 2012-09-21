@@ -62,5 +62,11 @@ int get_primes_from_sieve (char *sieve, size_t ssize, int *primes);
 int* permutation(int *data, const unsigned int L, const unsigned int N);
 
 
+/* This function may only be used if x<sieve_len, or x is a prime */
+unsigned int phi_recursive (unsigned int *phis, size_t phis_len,
+                            const char *sieve, size_t sieve_len,
+                            const unsigned int x);
+
+
 #endif /* HUTIL_H */
 
