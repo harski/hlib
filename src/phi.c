@@ -2,14 +2,59 @@
  * Licensed under the 2-clause BSD license. */
 
 
+#include <math.h>
 #include <stdlib.h> /* size_t */
 #include "hutil.h"
+
+/* returns 0 if x is prime, or the divisor d */
+static unsigned get_divisor (const unsigned x, const char *sieve, size_t sieve_len)
+{
+    unsigned int d;
+    unsigned int sqrt_x = (unsigned int) (1.0 + sqrt((double)x));
+
+    if (x%2==0)
+        return 2;
+
+    d = 3;
+    while (1) {
+        if (d >= sieve_len)
+            break;
+
+        if (d >= sqrt_x)
+            return 0;
+
+        if (!sieve[d]) {
+            d+=2;
+            continue;
+        } else if (x%d==0) {
+            return d;
+        }
+
+        d+=2;
+    }
+
+    while (d < sqrt_x) {
+        if (x%d==0) {
+            return d;
+        }
+
+        d+=2;
+    }
+
+    return 0;
+}
+
 
 /* This function may only be used if x<sieve_len, or x is a prime */
 unsigned int phi_recursive (unsigned int *phis, size_t phis_len,
                             const char *sieve, size_t sieve_len,
                             const unsigned int x)
 {
+    unsigned int divisor;
+    unsigned int n;
+    unsigned int phi;
+
+
     if (!x)
         return 0;
 
@@ -28,48 +73,42 @@ unsigned int phi_recursive (unsigned int *phis, size_t phis_len,
         if (m%2==0)
             phi *= 2;
 
-        phis[x] = phi;
+        if (x<phis_len)
+            phis[x] = phi;
+
         return phi;
     }
 
-    /* If it is known whether n is a prime or not */
-    if (x<sieve_len) {
-        if (sieve[x]) {
-            return x-1;
-        } else {
-            unsigned int n;
-            unsigned int phi;
-
-            /* find a prime divisor */
-            unsigned int m;
-            for (m=3; m<x; ++m) {
-                if (!sieve[m])
-                    continue;
-
-                if (x%m==0)
-                    break;
-            }
-
-            n = x/m;
-            if (n%m==0) {
-                phi = phi_recursive(phis, phis_len, sieve, sieve_len, n) * m;
-                phis[x] = phi;
-                return phi;
-            } else {
-                phi = phi_recursive(phis, phis_len, sieve, sieve_len, n) *
-                      phi_recursive(phis, phis_len, sieve, sieve_len, m);
-                phis[x] = phi;
-                return phi;
-            }
-
-        }
-    }
-    
-    /* Now, what to do when the sieve is too small, i.e.
-     * we don't know if x is a prime or not... */
-    if (is_prime_brute(x))
+    if (x<sieve_len && sieve[x]) {
+        phis[x] = x-1;
         return x-1;
+    }
 
-    return 0;
+    divisor = get_divisor(x, sieve, sieve_len);
+    if (!divisor) {
+        if (x<phis_len) {
+            phis[x] = x-1;
+        }
+        return x-1;
+    }
+
+    /* NOTE: divisor is a prime */
+    n = x/divisor;
+    if (n%divisor==0) {
+        phi = phi_recursive(phis, phis_len, sieve, sieve_len, n) * divisor;
+
+        if (x<phis_len)
+            phis[x] = phi;
+
+        return phi;
+    } else {
+        phi = phi_recursive(phis, phis_len, sieve, sieve_len, n) *
+              phi_recursive(phis, phis_len, sieve, sieve_len, divisor);
+
+        if (x<phis_len)
+            phis[x] = phi;
+
+        return phi;
+    }
 }
 
