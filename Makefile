@@ -98,5 +98,10 @@ $(SOBJ_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)/hutil.h
 clean:
 	rm -rf $(OBJ_DIR)/ $(SOBJ_DIR)/ $(LIBNAME).a $(LIBNAME).so.*
 
-.PHONY: all all-before clean install install-shared install-static shared static
+uninstall:
+	rm -rf $(LIBDIR)/libhutil.so*
+	rm -rf $(LIBDIR)/libhutil.a
+	rm -rf $(INCLUDEDIR)/hutil.h
+
+.PHONY: all all-before clean install install-shared install-static shared static uninstall
 
