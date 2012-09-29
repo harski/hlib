@@ -5,6 +5,9 @@
 #ifndef HUTIL_H
 #define HUTIL_H
 
+#include <stdlib.h>
+
+
 /* Upper limits for number of primes */
 #define H_PRIMES_IN_UINT32 203280221
 #define H_PRIMES_IN_INT32 105097565
@@ -27,6 +30,11 @@ int is_prime_brute(int a);
  * Returns a non-zero or 0 if depending wether the number was found.
  */
 int is_prime_table(int a, int *table, int len);
+
+
+/* Raise unsigned int to a unsigned power. If uint cannot hold the result
+ * 0 is returned instead of the real result */
+unsigned int pow_uint (const unsigned int base,  const unsigned int exp);
 
 
 /* Returns the index of the prime or -1 if it isn't in the table. */
