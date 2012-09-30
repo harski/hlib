@@ -15,19 +15,17 @@ static int calc_gcd(int *a, int *b);
 
 
 /* Calculates and returns the greatest common divisor as integer */
-int gcd(int a, int b) {
-    if (b > a) {
-        int tmp = a;
-        a = b;
-        b = tmp;
-    }
-    
-    return calc_gcd(&a, &b);
+unsigned int gcd (unsigned int a, unsigned int b) {
+    if (b > a)
+        return calc_gcd(&b, &a);
+    else
+        return calc_gcd(&a, &b);
 }
 
 
-/* A helper function for calculating the gcd. Does the actual dirty work */
-static int calc_gcd(int *a, int *b) {
+/* A helper function for calculating the gcd. Does the actual dirty work.
+ * *a is always expected to be greater than *b.*/
+static unsigned int calc_gcd (unsigned int *a, unsigned int *b) {
     if (*b == 0)
        return *a;
 

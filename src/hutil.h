@@ -16,7 +16,7 @@
 
 
 /* Front-end function to call for calculating gcd */
-int gcd(int a, int b);
+unsigned int gcd (unsigned int a, unsigned int b);
 
 
 /* Returns 1 if a is prime, 0 if it's not */
