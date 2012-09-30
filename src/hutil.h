@@ -20,7 +20,7 @@ unsigned int gcd (unsigned int a, unsigned int b);
 
 
 /* Returns 1 if a is prime, 0 if it's not */
-int is_prime_brute(int a);
+int is_prime_brute (const unsigned int a);
 
 
 /* Checks if a given number is a prime by checking the table.
