@@ -6,3 +6,5 @@ information.
 hlib is a miscallaneous utility library inspired by
 http://projecteuler.net math/programming problems.
 
+WARNING: The library is still a very much WIP, and the existing
+interfaces are going to be thinked over (read: broken).
