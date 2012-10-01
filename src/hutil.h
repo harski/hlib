@@ -109,7 +109,7 @@ unsigned int *prime_table (unsigned int n, unsigned int *primes);
  * \param size The size of the sieve.
  * \return Total number of primes in the sieve.
  */
-int prime_sieve (char *sieve, size_t size);
+unsigned int prime_sieve (char *sieve, const size_t size);
 
 
 /**
