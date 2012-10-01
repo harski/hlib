@@ -11,7 +11,7 @@
 /* Function that does the dirty work for calculating
  * gcd
  */
-static int calc_gcd(int *a, int *b);
+static unsigned int calc_gcd(unsigned int *a, unsigned int *b);
 
 
 /* Calculates and returns the greatest common divisor as integer */
