@@ -72,6 +72,9 @@ install-shared: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
 install-static: $(PREFIX) $(LIBDIR) $(INCLUDEDIR)
 	install $(TARGET_STATIC) $(LIBDIR)
 
+doc: src/hutil.h
+	doxygen Doxyfile
+
 dirs: $(OBJ_DIR) $(SOBJ_DIR)
 
 $(OBJ_DIR):
@@ -103,5 +106,5 @@ uninstall:
 	rm -rf $(LIBDIR)/libhutil.a
 	rm -rf $(INCLUDEDIR)/hutil.h
 
-.PHONY: all all-before clean install install-shared install-static shared static uninstall
+.PHONY: all all-before clean doc install install-shared install-static shared static uninstall
 
