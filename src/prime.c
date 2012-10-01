@@ -81,7 +81,7 @@ static int cmpint_search (const void *key, const void *x)
 }
 
 
-int is_prime_table (unsigned int a, unsigned int *primes, size_t psize)
+int is_prime_table (const unsigned int a, const unsigned int *primes, const size_t psize)
 {
     void *tmp = bsearch(&a, primes, psize, sizeof(unsigned int), cmpint_search);
     if (tmp==NULL)
@@ -91,7 +91,7 @@ int is_prime_table (unsigned int a, unsigned int *primes, size_t psize)
 }
 
 
-int prime_table_get_index(unsigned int a, unsigned int *table, size_t len)
+int prime_table_get_index (const unsigned int a, const unsigned int *table, const size_t len)
 {
     void * tmp = bsearch(&a, table, len, sizeof(unsigned int), cmpint_search);
 
@@ -102,7 +102,7 @@ int prime_table_get_index(unsigned int a, unsigned int *table, size_t len)
 }
 
 
-unsigned int primes_under (unsigned int n)
+unsigned int primes_under (const unsigned int n)
 {
     if (n==0)
         return 0;
@@ -112,7 +112,7 @@ unsigned int primes_under (unsigned int n)
 
 /* Returns n first prime numbers as a int*
  * int *primes _must_ be initialized beforehand */
-unsigned int *prime_table (unsigned int n, unsigned int *primes)
+unsigned int *prime_table (const unsigned int n, unsigned int *primes)
 {
     char *sieve;
     unsigned int i, j, p;
@@ -168,7 +168,7 @@ unsigned int prime_sieve (char *sieve, const size_t size)
 
 
 
-int get_primes_from_sieve (char *sieve, size_t ssize, unsigned int *primes)
+int get_primes_from_sieve (const char *sieve, const size_t ssize, unsigned int *primes)
 {
     int i;
     int pcount = 0;

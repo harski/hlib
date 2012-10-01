@@ -63,7 +63,7 @@ int is_prime_brute (const unsigned int a);
  * \param psize The length of the prime array.
  * \return 0 if a was not found, 1 if it was.
  */
-int is_prime_table (unsigned int a, unsigned int *primes, size_t psize);
+int is_prime_table (const unsigned int a, const unsigned int *primes, const size_t psize);
 
 
 /**
@@ -82,7 +82,7 @@ unsigned int pow_uint (const unsigned int base, const unsigned int exp);
  * \param len The length of the prime array.
  * \return The index of a if it is found, otherwise -1.
  */
-int prime_table_get_index (unsigned int a, unsigned int *table, size_t len);
+int prime_table_get_index (const unsigned int a, const unsigned int *table, const size_t len);
 
 
 /**
@@ -90,7 +90,7 @@ int prime_table_get_index (unsigned int a, unsigned int *table, size_t len);
  * \param n The upper limit.
  * \return The upper limit of number of primes below n.
  */
-unsigned int primes_under (unsigned int n);
+unsigned int primes_under (const unsigned int n);
 
 
 /**
@@ -99,7 +99,7 @@ unsigned int primes_under (unsigned int n);
  * \param primes At least n elements long pre-allocated array of integers.
  * \return The filled primes array.
  */
-unsigned int *prime_table (unsigned int n, unsigned int *primes);
+unsigned int *prime_table (const unsigned int n, unsigned int *primes);
 
 
 /**
@@ -119,7 +119,7 @@ unsigned int prime_sieve (char *sieve, const size_t size);
  * \param primes Pre-allocated, array big enough to hold the primes from the sieve.
  * \return Number of primes in primes (and in sieve).
  */
-int get_primes_from_sieve (char *sieve, size_t ssize, unsigned int *primes);
+int get_primes_from_sieve (const char *sieve, const size_t ssize, unsigned int *primes);
 
 
 /*******************************************
