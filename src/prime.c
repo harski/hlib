@@ -100,13 +100,11 @@ int primes_under(int *n) {
  * int *primes _must_ be initialized beforehand */
 int* prime_table(int n, int *primes) {
 
-    int *sieve;
-    int i, j, p;
-    int upper_bound;
+    char *sieve;
+    unsigned int i, j, p;
+    const unsigned int upper_bound = 20*n;
 
-    upper_bound = 20 * n;
- 
-    sieve = malloc(upper_bound*sizeof(int));
+    sieve = malloc(upper_bound*sizeof(char));
 
     for (i=0; i<upper_bound; i++) {
         sieve[i] = 1;
