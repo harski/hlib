@@ -3,14 +3,14 @@
 
 
 #include <math.h>
-#include <stdlib.h> /* size_t */
+#include <stddef.h>
 #include "hutil.h"
 
 /* returns 0 if x is prime, or the divisor d */
-static unsigned get_divisor (const unsigned x, const char *sieve, size_t sieve_len)
+static unsigned get_divisor (const unsigned x, const char *sieve, const size_t sieve_len)
 {
     unsigned int d;
-    unsigned int sqrt_x = (unsigned int) (1.0 + sqrt((double)x));
+    const unsigned int sqrt_x = (unsigned int) (1.0 + sqrt((double)x));
 
     if (x%2==0)
         return 2;
@@ -34,9 +34,8 @@ static unsigned get_divisor (const unsigned x, const char *sieve, size_t sieve_l
     }
 
     while (d < sqrt_x) {
-        if (x%d==0) {
+        if (x%d==0)
             return d;
-        }
 
         d+=2;
     }
@@ -46,14 +45,13 @@ static unsigned get_divisor (const unsigned x, const char *sieve, size_t sieve_l
 
 
 /* This function may only be used if x<sieve_len, or x is a prime */
-unsigned int phi_recursive (unsigned int *phis, size_t phis_len,
-                            const char *sieve, size_t sieve_len,
+unsigned int phi_recursive (unsigned int *phis, const size_t phis_len,
+                            const char *sieve, const size_t sieve_len,
                             const unsigned int x)
 {
     unsigned int divisor;
     unsigned int n;
     unsigned int phi;
-
 
     if (!x)
         return 0;
@@ -68,8 +66,8 @@ unsigned int phi_recursive (unsigned int *phis, size_t phis_len,
     /* phi(2m): if m even, 2*phi(m)
      *          if m odd,    phi(m) */
     if (x%2==0) {
-        unsigned int m = x/2;
-        unsigned int phi = phi_recursive (phis, phis_len, sieve, sieve_len, m);
+        const unsigned int m = x/2;
+        phi = phi_recursive (phis, phis_len, sieve, sieve_len, m);
         if (m%2==0)
             phi *= 2;
 
