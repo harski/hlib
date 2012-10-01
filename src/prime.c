@@ -14,6 +14,10 @@
 static unsigned int calc_gcd(unsigned int *a, unsigned int *b);
 
 
+/* Comparator function for binary search */
+static int cmpint_search (const void *key, const void *x);
+
+
 /* Calculates and returns the greatest common divisor as integer */
 unsigned int gcd (unsigned int a, unsigned int b) {
     if (b > a)
@@ -64,15 +68,22 @@ int is_prime_brute(const unsigned int a)
 }
 
 
-int cmpint_search (const void *key, const void *x)
+static int cmpint_search (const void *key, const void *x)
 {
-    return *(int *)key - *(int *)x;
+    if (*(unsigned int *)key == *(unsigned int *)x) {
+        return 0;
+    } else {
+        if (*(unsigned int *)key > *(unsigned int *)x)
+            return 1;
+        else
+            return -1;
+    }
 }
 
 
-int is_prime_table(int a, int *table, int len)
+int is_prime_table (unsigned int a, unsigned int *primes, size_t psize)
 {
-    void * tmp = bsearch(&a, table, len, sizeof(int), cmpint_search);
+    void *tmp = bsearch(&a, primes, psize, sizeof(unsigned int), cmpint_search);
     if (tmp==NULL)
         return 0;
     else
@@ -80,14 +91,14 @@ int is_prime_table(int a, int *table, int len)
 }
 
 
-int prime_table_get_index(int a, int *table, int len)
+int prime_table_get_index(unsigned int a, unsigned int *table, size_t len)
 {
-    void * tmp = bsearch(&a, table, len, sizeof(int), cmpint_search);
+    void * tmp = bsearch(&a, table, len, sizeof(unsigned int), cmpint_search);
 
     if (tmp==NULL)
         return -1;
 
-    return ((intptr_t)tmp - (intptr_t)table) / sizeof(int);
+    return ((intptr_t)tmp - (intptr_t)table) / sizeof(unsigned int);
 }
 
 
@@ -98,8 +109,8 @@ int primes_under(int *n) {
 
 /* Returns n first prime numbers as a int*
  * int *primes _must_ be initialized beforehand */
-int* prime_table(int n, int *primes) {
-
+unsigned int *prime_table (unsigned int n, unsigned int *primes)
+{
     char *sieve;
     unsigned int i, j, p;
     const unsigned int upper_bound = 20*n;
@@ -154,7 +165,7 @@ int prime_sieve (char *sieve, size_t size)
 
 
 
-int get_primes_from_sieve (char *sieve, size_t ssize, int *primes)
+int get_primes_from_sieve (char *sieve, size_t ssize, unsigned int *primes)
 {
     int i;
     int pcount = 0;
