@@ -90,7 +90,7 @@ int prime_table_get_index (unsigned int a, unsigned int *table, size_t len);
  * \param n The upper limit.
  * \return The upper limit of number of primes below n.
  */
-int primes_under (int *n);
+unsigned int primes_under (unsigned int n);
 
 
 /**

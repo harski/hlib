@@ -102,8 +102,11 @@ int prime_table_get_index(unsigned int a, unsigned int *table, size_t len)
 }
 
 
-int primes_under(int *n) {
-    return (int)((1.25506 * *n) / log((double)*n));
+unsigned int primes_under (unsigned int n)
+{
+    if (n==0)
+        return 0;
+    return (unsigned int)((1.25506 * n) / log((double)n));
 }
 
 
