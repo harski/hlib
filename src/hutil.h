@@ -28,10 +28,25 @@
 
 
 /* Upper limits for number of primes */
-#define H_PRIMES_IN_UINT32 203280221
-#define H_PRIMES_IN_INT32 105097565
-#define H_PRIMES_IN_UINT64 18446744073709551616
-#define H_PRIMES_IN_INT64 9223372036854775808
+/**
+ * \brief Number of primes in uint32
+ */
+#define PRIMES_IN_UINT32 203280221
+
+/**
+ * \brief Number of primes in int32
+ */
+#define PRIMES_IN_INT32 105097565
+
+/**
+ * \brief Number of primes in uint64
+ */
+#define PRIMES_IN_UINT64 18446744073709551616
+
+/**
+ * \brief Number of primes in int64
+ */
+#define PRIMES_IN_INT64 9223372036854775808
 
 
 /**
