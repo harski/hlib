@@ -19,7 +19,7 @@ INCLUDEDIR =$(PREFIX)/include
 
 CC =gcc
 AR =ar
-CFLAGS =-c -Wall -pedantic
+CFLAGS =-c -Wall -Wextra -Werror -pedantic -std=c99
 
 ifdef DEBUG
 CFLAGS += -g
