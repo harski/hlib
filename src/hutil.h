@@ -134,7 +134,7 @@ unsigned int prime_sieve (char *sieve, const size_t size);
  * \param primes Pre-allocated, array big enough to hold the primes from the sieve.
  * \return Number of primes in primes (and in sieve).
  */
-int get_primes_from_sieve (const char *sieve, const size_t ssize, unsigned int *primes);
+unsigned int get_primes_from_sieve (const char *sieve, const size_t ssize, unsigned int *primes);
 
 
 /**

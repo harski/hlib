@@ -146,7 +146,7 @@ unsigned int *prime_table (const unsigned int n, unsigned int *primes)
 
 unsigned int prime_sieve (char *sieve, const size_t size)
 {
-    int i, j;
+    unsigned int i, j;
     unsigned int counter = 0;
 
     sieve[0] = 0;
@@ -168,9 +168,9 @@ unsigned int prime_sieve (char *sieve, const size_t size)
 
 
 
-int get_primes_from_sieve (const char *sieve, const size_t ssize, unsigned int *primes)
+unsigned int get_primes_from_sieve (const char *sieve, const size_t ssize, unsigned int *primes)
 {
-    int i;
+    unsigned int i;
     int pcount = 0;
 
     if (ssize >= 3)
