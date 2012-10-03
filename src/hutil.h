@@ -137,10 +137,13 @@ unsigned int prime_sieve (char *sieve, const size_t size);
 int get_primes_from_sieve (const char *sieve, const size_t ssize, unsigned int *primes);
 
 
-/*******************************************
- * Permutation, originally by Sami Hyvonen
- ******************************************/
-int* permutation(int *data, const unsigned int L, const unsigned int N);
+/**
+ * \brief Calculate nth permutation for int array.
+ * \param data Int array holding the data.
+ * \param size Number of elements in data array.
+ * \param n Which permutation to calculate. NOTE: Must be greater than 0.
+ */
+int *nth_permutation (int *data, size_t size, unsigned int n);
 
 
 /**
