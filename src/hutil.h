@@ -25,7 +25,7 @@
 #define HUTIL_H
 
 #include <stdbool.h>
-#include <stdlib.h>
+#include <stddef.h>
 
 
 /* Upper limits for number of primes */
