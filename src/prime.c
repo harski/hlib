@@ -108,27 +108,28 @@ unsigned int primes_under (const unsigned int n)
  * int *primes _must_ be initialized beforehand */
 unsigned int *prime_table (const unsigned int n, unsigned int *primes)
 {
-    char *sieve;
-    unsigned int i, j, p;
+    bool *sieve;
     const unsigned int upper_bound = 20*n;
 
-    sieve = malloc(upper_bound*sizeof(char));
+    sieve = malloc(upper_bound*sizeof(bool));
 
-    for (i=0; i<upper_bound; i++) {
-        sieve[i] = 1;
-    }
+    if (sieve==NULL)
+        return NULL;
+
+    for (unsigned int i=0; i<upper_bound; i++)
+        sieve[i] = true;
     
     primes[0] = 2;
     primes[1] = 3;
 
-    for(i=2; i<n; i++) {
+    unsigned int p;
+    for (unsigned int i=2; i<n; i++) {
         p = (primes[i-1]-1)/2;
 
-        for(j=p; j<upper_bound; j+=primes[i-1]) {
-            sieve[j] = 0;
-        }
+        for(unsigned int j=p; j<upper_bound; j+=primes[i-1])
+            sieve[j] = false;
 
-        while(!sieve[++p]);
+        while (!sieve[++p]);
         primes[i] = 2*p+1;
     }
 

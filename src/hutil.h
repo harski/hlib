@@ -113,7 +113,7 @@ unsigned int primes_under (const unsigned int n);
  * \brief Get an array of n first primes.
  * \param n The number of primes to get.
  * \param primes At least n elements long pre-allocated array of integers.
- * \return The filled primes array.
+ * \return The filled primes array or NULL if request failed (not enough memory).
  */
 unsigned int *prime_table (const unsigned int n, unsigned int *primes);
 
