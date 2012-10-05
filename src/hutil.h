@@ -24,6 +24,7 @@
 #ifndef HUTIL_H
 #define HUTIL_H
 
+#include <stdbool.h>
 #include <stdlib.h>
 
 
@@ -120,11 +121,11 @@ unsigned int *prime_table (const unsigned int n, unsigned int *primes);
 /**
  * \brief Get size-long sieve of Erathosthenes (a prime sieve).
  *
- * \param sieve Size-long, preallocated char array.
+ * \param sieve Size-long, preallocated bool array.
  * \param size The size of the sieve.
  * \return Total number of primes in the sieve.
  */
-unsigned int prime_sieve (char *sieve, const size_t size);
+unsigned int prime_sieve (bool *sieve, const size_t size);
 
 
 /**

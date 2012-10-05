@@ -144,22 +144,21 @@ unsigned int *prime_table (const unsigned int n, unsigned int *primes)
 }
 
 
-unsigned int prime_sieve (char *sieve, const size_t size)
+unsigned int prime_sieve (bool *sieve, const size_t size)
 {
-    unsigned int i, j;
     unsigned int counter = 0;
 
-    sieve[0] = 0;
-    sieve[1] = 0;
+    sieve[0] = false;
+    sieve[1] = false;
 
-    for (i=2; i<size; ++i)
-        sieve[i] = 1;
+    for (unsigned int i=2; i<size; ++i)
+        sieve[i] = true;
 
-    for (i=2; i<size; ++i) {
+    for (unsigned int i=2; i<size; ++i) {
         if (sieve[i]) {
             ++counter;
-            for (j=2*i; j<size; j+=i)
-                sieve[j] = 0;
+            for (unsigned int j=2*i; j<size; j+=i)
+                sieve[j] = false;
         }
     }
     
