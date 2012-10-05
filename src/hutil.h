@@ -158,7 +158,7 @@ int *nth_permutation (int *data, size_t size, unsigned int n);
  * \sa prime_sieve
  */
 unsigned int phi_recursive (unsigned int *phis, const size_t phis_len,
-                            const char *sieve, const size_t sieve_len,
+                            const bool *sieve, const size_t sieve_len,
                             const unsigned int x);
 
 

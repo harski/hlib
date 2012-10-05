@@ -7,7 +7,7 @@
 #include "hutil.h"
 
 /* returns 0 if x is prime, or the divisor d */
-static unsigned get_divisor (const unsigned x, const char *sieve, const size_t sieve_len)
+static unsigned get_divisor (const unsigned x, const bool *sieve, const size_t sieve_len)
 {
     unsigned int d;
     const unsigned int sqrt_x = (unsigned int) (1.0 + sqrt((double)x));
@@ -46,7 +46,7 @@ static unsigned get_divisor (const unsigned x, const char *sieve, const size_t s
 
 /* This function may only be used if x<sieve_len, or x is a prime */
 unsigned int phi_recursive (unsigned int *phis, const size_t phis_len,
-                            const char *sieve, const size_t sieve_len,
+                            const bool *sieve, const size_t sieve_len,
                             const unsigned int x)
 {
     unsigned int divisor;
