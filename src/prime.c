@@ -75,13 +75,13 @@ static int cmpint_search (const void *key, const void *x)
 }
 
 
-int is_prime_table (const unsigned int a, const unsigned int *primes, const size_t psize)
+bool is_prime_table (const unsigned int a, const unsigned int *primes, const size_t psize)
 {
     void *tmp = bsearch(&a, primes, psize, sizeof(unsigned int), cmpint_search);
     if (tmp==NULL)
-        return 0;
+        return false;
     else
-        return 1;
+        return true;
 }
 
 

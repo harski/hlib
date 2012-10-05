@@ -77,9 +77,9 @@ bool is_prime_brute (const unsigned int a);
  * \param a The number which primeness is checked.
  * \param primes The array of primes in ascending order.
  * \param psize The length of the prime array.
- * \return 0 if a was not found, 1 if it was.
+ * \return false if a was not found, true if it was.
  */
-int is_prime_table (const unsigned int a, const unsigned int *primes, const size_t psize);
+bool is_prime_table (const unsigned int a, const unsigned int *primes, const size_t psize);
 
 
 /**
