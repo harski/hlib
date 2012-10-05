@@ -1,4 +1,4 @@
-/* Copyright 2011 Sami Hyvönen
+/* Copyright 2011-2012 Sami Hyvönen
  * Licensed under the 2-clause BSD license. */
 
 #include <stdlib.h>
