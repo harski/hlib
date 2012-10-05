@@ -39,32 +39,26 @@ static unsigned int calc_gcd (unsigned int *a, unsigned int *b) {
 }
 
 
-/* Brute-forces the given number.
- * Returns 1 if prime, 0 if not
- */
-int is_prime_brute(const unsigned int a)
+/* Brute-forces the given number. */
+bool is_prime_brute (const unsigned int a)
 {
-    unsigned int running = 3;
-
     switch (a) {
         case 0:
         case 1:
-            return 0;
+            return false;
         case 2:
-            return 1;
+            return true;
     }
 
     if(a%2 == 0)
-        return 0;
+        return false;
     
-    while(running <= (int)(1.0 + sqrt((double)a))) {
+    for (unsigned running = 3; running <= (int)(1.0 + sqrt((double)a)); running += 2) {
         if( a % running == 0 )
-            return 0;
-
-        running += 2;
+            return false;
     }
 
-    return 1;
+    return true;
 }
 
 

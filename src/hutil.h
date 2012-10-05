@@ -62,11 +62,11 @@ unsigned int gcd (unsigned int a, unsigned int b);
 /**
  * \brief Brute force check for primeness of an integer.
  * \param a The number to be checked.
- * \return 1 if a is prime, 0 if it is not.
+ * \return true or false.
  * \sa is_prime_table
  * \sa prime_table_get_index
  */
-int is_prime_brute (const unsigned int a);
+bool is_prime_brute (const unsigned int a);
 
 
 /**
