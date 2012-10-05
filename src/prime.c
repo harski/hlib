@@ -161,15 +161,16 @@ unsigned int prime_sieve (bool *sieve, const size_t size)
 }
 
 
-/* TODO: check the ssize first! */
-unsigned int get_primes_from_sieve (const bool *sieve, const size_t ssize, unsigned int *primes)
+unsigned int get_primes_from_sieve (const bool *sieve, const size_t ssize, unsigned int *primes, const size_t psize)
 {
     unsigned int pcount = 0;
-
-    if (ssize >= 3)
+    
+    if (ssize >= 3 && psize>=1)
         primes[pcount++] = 2;
+    else
+        return 0;
 
-    for (unsigned int i=3; i<ssize; i+=2) {
+    for (unsigned int i=3; i<ssize && pcount<psize; i+=2) {
         if (sieve[i])
             primes[pcount++] = i;
     }

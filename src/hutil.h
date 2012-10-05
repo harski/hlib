@@ -130,12 +130,18 @@ unsigned int prime_sieve (bool *sieve, const size_t size);
 
 /**
  * \brief Get prime numbers from a sieve.
+ *
+ * Fills primes with at most psize primes, less if sieve doesn't have that many
+ * primes.
+ *
  * \param sieve Sieve containing the primes.
  * \param ssize Size (length) of the sieve.
- * \param primes Pre-allocated, array big enough to hold the primes from the sieve.
- * \return Number of primes in primes (and in sieve).
+ * \param primes Pre-allocated array of psize length.
+ * \param psize Size of primes array.
+ * \return Number of primes stored in prmies array.
  */
-unsigned int get_primes_from_sieve (const bool *sieve, const size_t ssize, unsigned int *primes);
+unsigned int get_primes_from_sieve (const bool *sieve, const size_t ssize,
+                                    unsigned int *primes, const size_t psize);
 
 
 /**
