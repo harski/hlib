@@ -168,5 +168,14 @@ unsigned int phi_recursive (unsigned int *phis, const size_t phis_len,
                             const unsigned int x);
 
 
+void init_pascal (size_t *result, size_t row_length);
+size_t lower_bound (size_t *pascal, size_t row_length, size_t L, unsigned int n);
+size_t upper_bound (size_t *pascal, size_t row_length, size_t L, unsigned int n);
+size_t combination_size (size_t *pascal, size_t row_length, size_t L, size_t N);
+void nth_combination (size_t *pascal, size_t row_length, int *base, size_t base_size,
+                      size_t N, int *result, size_t result_size);
+
+
+
 #endif /* HUTIL_H */
 
