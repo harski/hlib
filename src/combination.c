@@ -1,6 +1,8 @@
-
+/* Copyright 2012 Sami Hyvönen
+ * Licensed under the 2-clause BSD license. */
 
 #include <stdlib.h>
+#include "hutil.h"
 
 /*
 Usage: 
@@ -22,10 +24,11 @@ Hint: Split index space* for multicore for speedup.
 *) upper_bound-lower_bound 
  */
 
-/*time complexity O(n^2), where n = row_length*/
+/* time complexity O(n^2), where n = row_length.
+ * result is row_length * row_length array. */
 void init_pascal (size_t *result, size_t row_length)
 {
-    int i, j;
+    unsigned int i, j;
 
     result[0] = 1;
     
